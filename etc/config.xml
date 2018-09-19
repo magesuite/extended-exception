@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <extended_exception>
+            <processors>
+                <web_processor>1</web_processor>
+                <memory_peak_processor>1</memory_peak_processor>
+                <memory_usage_processor>1</memory_usage_processor>
+                <extra_data_processor>1</extra_data_processor>
+            </processors>
+        </extended_exception>
+    </default>
+</config>

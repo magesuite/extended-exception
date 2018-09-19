@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Magento\Framework\Console\CommandList">
+        <arguments>
+            <argument name="commands" xsi:type="array">
+                <item name="throw_exception" xsi:type="object">MageSuite\ExtendedException\Console\Command\ThrowException</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Magento\Framework\Logger\Monolog">
+        <arguments>
+            <argument name="processors" xsi:type="array">
+                <item name="0" xsi:type="object">MageSuite\ExtendedException\Processor\WebProcessor</item>
+                <item name="1" xsi:type="object">MageSuite\ExtendedException\Processor\MemoryPeakUsageProcessor</item>
+                <item name="2" xsi:type="object">MageSuite\ExtendedException\Processor\MemoryUsageProcessor</item>
+                <item name="3" xsi:type="object">MageSuite\ExtendedException\Processor\ExtraDataProcessor</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Magento\Framework\Serialize\Serializer\Json">
+        <plugin name="add_additional_information_to_error_log"
+                type="MageSuite\ExtendedException\Plugin\AddAdditionalInformationToErrorLog"
+                sortOrder="10"
+        />
+    </type>
+</config>
