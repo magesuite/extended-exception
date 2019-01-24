@@ -4,6 +4,20 @@ namespace MageSuite\ExtendedException\Console\Command;
 
 class ThrowException extends \Symfony\Component\Console\Command\Command
 {
+    /**
+     * @var \Psr\Log\LoggerInterface
+     */
+    private $logger;
+
+    public function __construct(
+        \Psr\Log\LoggerInterface $logger
+    )
+    {
+        parent::__construct();
+
+        $this->logger = $logger;
+    }
+
     protected function configure()
     {
         $this->setName('exception:throw');
@@ -14,6 +28,8 @@ class ThrowException extends \Symfony\Component\Console\Command\Command
         \Symfony\Component\Console\Output\OutputInterface $output
     )
     {
-        throw new \Magento\Framework\Exception\LocalizedException(__('Exception message'));
+        $this->logger->error('ThrowException message');
+
+        throw new \Magento\Framework\Exception\LocalizedException(__('ThrowException message'));
     }
 }
