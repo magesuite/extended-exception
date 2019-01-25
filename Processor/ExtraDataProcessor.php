@@ -43,7 +43,7 @@ class ExtraDataProcessor
      */
     public function __invoke(array $record)
     {
-        if(!$this->isExtraDataProcessorEnabled() OR $this->isCronProcess()) {
+        if(!$this->isExtraDataProcessorEnabled() OR $this->isCronLog($record['message'])) {
             return $record;
         }
 
@@ -154,7 +154,7 @@ class ExtraDataProcessor
         return $this->getConfig(self::XML_PATH_ADD_EXTRA_DATA_PROCESSOR);
     }
 
-    protected function isCronProcess(){
-        return php_sapi_name() == 'cli' AND !isset($_SERVER['TERM']);
+    protected function isCronLog($message) {
+        return stripos($message, 'Cron Job') !== FALSE;
     }
 }
