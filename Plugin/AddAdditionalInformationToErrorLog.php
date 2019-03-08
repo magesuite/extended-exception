@@ -41,6 +41,10 @@ class AddAdditionalInformationToErrorLog
      */
     protected function isErrorReport($data)
     {
+        if($data instanceof \stdClass){
+            return false;
+        }
+
         return isset($data[0]) and isset($data[1]) and isset($data['url']) and isset($data['script_name']);
     }
 }
