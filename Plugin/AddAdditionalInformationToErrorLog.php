@@ -44,6 +44,10 @@ class AddAdditionalInformationToErrorLog
         if($data instanceof \stdClass){
             return false;
         }
+        
+        if(!is_array($data)) {
+            return false;
+        }
 
         return isset($data[0]) and isset($data[1]) and isset($data['url']) and isset($data['script_name']);
     }
