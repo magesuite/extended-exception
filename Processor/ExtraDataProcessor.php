@@ -14,7 +14,7 @@ class ExtraDataProcessor
     use \MageSuite\ExtendedException\Service\ScopeConfigProvider;
 
     const XML_PATH_ADD_EXTRA_DATA_PROCESSOR = 'extended_exception/processors/extra_data_processor';
-    
+
     /**
      * The currently configured extra data.
      *
@@ -31,7 +31,7 @@ class ExtraDataProcessor
     {
         $this->setExtraData($extraData);
     }
-    
+
     /**
      * Magic method for instance invokation as a function.
      *
@@ -43,7 +43,7 @@ class ExtraDataProcessor
      */
     public function __invoke(array $record)
     {
-        if(!$this->isExtraDataProcessorEnabled() OR $this->isCronLog($record['message'])) {
+        if(!$this->isExtraDataProcessorEnabled() || $this->isExcluded($record['message'])) {
             return $record;
         }
 
@@ -55,7 +55,7 @@ class ExtraDataProcessor
             'cookies' => isset($_COOKIE) ? $_COOKIE : [],
             'server' => isset($_SERVER) ? $_SERVER: [],
         ]);
-        
+
         $record['extra'] = $this->appendExtraFields($record['extra']);
 
         return $record;
@@ -154,7 +154,17 @@ class ExtraDataProcessor
         return $this->getConfig(self::XML_PATH_ADD_EXTRA_DATA_PROCESSOR);
     }
 
+    protected function isExcluded($message) {
+        return $this->isCronLog($message) ||
+            $this->isCacheCleanupLog($message);
+    }
+
     protected function isCronLog($message) {
         return stripos($message, 'Cron Job') !== FALSE;
+    }
+
+    protected function isCacheCleanupLog($message)
+    {
+        return stripos($message, 'cache_clear') !== FALSE;
     }
 }
