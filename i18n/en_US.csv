@@ -1,0 +1,8 @@
+"ThrowException message","ThrowException message"
+"Exception message","Exception message"
+"Extended exception","Extended exception"
+"Available processors","Available processors"
+"Web - url/method and remote IP of the current web request","Web - url/method and remote IP of the current web request"
+"Memory peak usage","Memory peak usage"
+"Memory usage","Memory usage"
+"Extra data - arbitrary extra data like app mode and global variables ($_POST, $_GET, $_SESSION, $_COOKIE)","Extra data - arbitrary extra data like app mode and global variables ($_POST, $_GET, $_SESSION, $_COOKIE)"
