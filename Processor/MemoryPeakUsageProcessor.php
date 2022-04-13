@@ -8,7 +8,7 @@ class MemoryPeakUsageProcessor extends \Monolog\Processor\MemoryPeakUsageProcess
 
     const XML_PATH_ADD_MEMORY_PEAK_PROCESSOR = 'extended_exception/processors/memory_peak_processor';
 
-    public function __invoke(array $record)
+    public function __invoke(array $record): array
     {
         if(!$this->getConfig(self::XML_PATH_ADD_MEMORY_PEAK_PROCESSOR)) {
             return $record;
