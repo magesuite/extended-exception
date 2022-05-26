@@ -8,7 +8,7 @@ class WebProcessor extends \Monolog\Processor\WebProcessor
 
     const XML_PATH_ADD_WEB_PROCESSOR = 'extended_exception/processors/web_processor';
 
-    public function __invoke(array $record)
+    public function __invoke(array $record): array
     {
         if(!$this->getConfig(self::XML_PATH_ADD_WEB_PROCESSOR)) {
             return $record;
