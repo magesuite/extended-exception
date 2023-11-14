@@ -44,7 +44,7 @@ class AddAdditionalInformationToErrorLog
         if($data instanceof \stdClass){
             return false;
         }
-        
+
         if(!is_array($data)) {
             return false;
         }
