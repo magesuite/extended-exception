@@ -10,7 +10,7 @@ class WebProcessor extends \Monolog\Processor\WebProcessor
 
     public function __invoke(array $record): array
     {
-        if(!$this->getConfig(self::XML_PATH_ADD_WEB_PROCESSOR)) {
+        if (!isset($this->serverData['REQUEST_URI']) || !$this->getConfig(self::XML_PATH_ADD_WEB_PROCESSOR)) {
             return $record;
         }
 

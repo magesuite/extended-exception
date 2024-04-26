@@ -10,7 +10,12 @@ class MemoryUsageProcessor extends \Monolog\Processor\MemoryUsageProcessor
 
     public function __invoke(array $record): array
     {
-        if(!$this->getConfig(self::XML_PATH_ADD_MEMORY_USAGE_PROCESSOR)) {
+        try {
+            if (!$this->getConfig(self::XML_PATH_ADD_MEMORY_USAGE_PROCESSOR)) {
+                return $record;
+            }
+        } catch (\DomainException) {
+            $this->getObjectManager()->get(\Magento\Framework\App\Config\ReinitableConfigInterface::class)->reinit();
             return $record;
         }
 
