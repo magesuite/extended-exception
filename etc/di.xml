@@ -18,11 +18,4 @@
             </argument>
         </arguments>
     </type>
-
-    <type name="Magento\Framework\Serialize\Serializer\Json">
-        <plugin name="add_additional_information_to_error_log"
-                type="MageSuite\ExtendedException\Plugin\AddAdditionalInformationToErrorLog"
-                sortOrder="10"
-        />
-    </type>
 </config>
