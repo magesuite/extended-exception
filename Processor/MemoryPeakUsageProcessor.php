@@ -14,7 +14,7 @@ class MemoryPeakUsageProcessor extends \Monolog\Processor\MemoryPeakUsageProcess
             if (!$this->getConfig(self::XML_PATH_ADD_MEMORY_PEAK_PROCESSOR)) {
                 return $record;
             }
-        } catch (\DomainException) {
+        } catch (\DomainException $e) {
             $this->getObjectManager()->get(\Magento\Framework\App\Config\ReinitableConfigInterface::class)->reinit();
             return $record;
         }
