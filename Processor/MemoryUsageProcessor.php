@@ -14,7 +14,7 @@ class MemoryUsageProcessor extends \Monolog\Processor\MemoryUsageProcessor
             if (!$this->getConfig(self::XML_PATH_ADD_MEMORY_USAGE_PROCESSOR)) {
                 return $record;
             }
-        } catch (\DomainException) {
+        } catch (\DomainException $e) {
             $this->getObjectManager()->get(\Magento\Framework\App\Config\ReinitableConfigInterface::class)->reinit();
             return $record;
         }
