@@ -47,7 +47,7 @@ class ExtraDataProcessor
             if (!$this->isExtraDataProcessorEnabled() || $this->isExcluded($record['message'])) {
                 return $record;
             }
-        } catch (\DomainException) {
+        } catch (\DomainException $e) {
             $this->getObjectManager()->get(\Magento\Framework\App\Config\ReinitableConfigInterface::class)->reinit();
             return $record;
         }
