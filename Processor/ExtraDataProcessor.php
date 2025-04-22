@@ -9,7 +9,7 @@ namespace MageSuite\ExtendedException\Processor;
  * @author Miloš Levačić <milos@levacic.net>
  * @author Krzysztof Kurzydło <krzysztof.kurzydlo@creativestyle.pl>
  */
-class ExtraDataProcessor
+class ExtraDataProcessor implements \Monolog\Processor\ProcessorInterface
 {
     use \MageSuite\ExtendedException\Service\ScopeConfigProvider;
 
@@ -33,18 +33,18 @@ class ExtraDataProcessor
     }
 
     /**
-     * Magic method for instance invokation as a function.
+     * Magic method for instance invocation as a function.
      *
      * Merges the passed record's `extra` entry with the configured extra data
      * (overwriting existing keys), and returns the record.
      *
-     * @param array $record
-     * @return array
+     * @param \Monolog\LogRecord $record
+     * @return \Monolog\LogRecord
      */
-    public function __invoke(array $record)
+    public function __invoke(\Monolog\LogRecord $record): \Monolog\LogRecord
     {
         try {
-            if (!$this->isExtraDataProcessorEnabled() || $this->isExcluded($record['message'])) {
+            if (!$this->isExtraDataProcessorEnabled() || $this->isExcluded($record->message)) {
                 return $record;
             }
         } catch (\DomainException $e) {
@@ -61,7 +61,7 @@ class ExtraDataProcessor
             'server' => isset($_SERVER) ? $_SERVER: [],
         ]);
 
-        $record['extra'] = $this->appendExtraFields($record['extra']);
+        $record->extra = $this->appendExtraFields($record->extra);
 
         return $record;
     }
