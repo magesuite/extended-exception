@@ -5,6 +5,9 @@
   "license": [
     "OSL-3.0"
   ],
+  "require": {
+    "monolog/monolog": "^3.0"
+  },
   "autoload": {
     "files": [ "registration.php" ],
     "psr-4": {
