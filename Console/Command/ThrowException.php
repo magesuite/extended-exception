@@ -26,8 +26,7 @@ class ThrowException extends \Symfony\Component\Console\Command\Command
     protected function execute(
         \Symfony\Component\Console\Input\InputInterface $input,
         \Symfony\Component\Console\Output\OutputInterface $output
-    )
-    {
+    ): int {
         $this->logger->error('ThrowException message');
 
         throw new \Magento\Framework\Exception\LocalizedException(__('ThrowException message'));
