@@ -24,9 +24,11 @@ trait ScopeConfigProvider
      * @return mixed
      */
     protected function getConfig($path) {
-        $scopeConfig = $this->getObjectManager()->get(\Magento\Framework\App\Config\ScopeConfigInterface::class);
+        return \MageSuite\ExtendedException\Service\ConfigReadGuard::run(function () use ($path) {
+            $scopeConfig = $this->getObjectManager()->get(\Magento\Framework\App\Config\ScopeConfigInterface::class);
 
-        return $scopeConfig->getValue($path, \Magento\Store\Model\ScopeInterface::SCOPE_STORE);
+            return $scopeConfig->getValue($path, \Magento\Store\Model\ScopeInterface::SCOPE_STORE);
+        });
     }
 
     /**
